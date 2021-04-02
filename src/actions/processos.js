@@ -20,7 +20,7 @@ export const getProcessos = () => (dispatch, getState)  =>  {
         config.headers['Authorization'] = `${tokenType} ${token}`
     }
 
-    axios.get('https://api.mocki.io/v1/1ce81622', config)
+    axios.get('https://api.escavador.com/api/v1/async/resultados', config)
     .then(res => {
         dispatch({
             type: GET_PROCESSOS,
