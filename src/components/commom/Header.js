@@ -11,7 +11,7 @@ const Header = ({title}) => {
 }
 
 Header.defaultProps = {
-    title: "Consulta de procesoss jurídicos",
+    title: "Consulta de procesos jurídicos",
 }
 
 Header.propTypes = {
