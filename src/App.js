@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react'
-import Header from "./components/commom/Header"
+import React, { Component, Fragment } from 'react';
+import Header from "./components/commom/Header";
+import Processos from "./components/templates/Processos";
 
 import {Provider} from 'react-redux'
 import store from './store'
@@ -10,6 +11,7 @@ class App extends Component{
       <Provider store={store}>
         <Fragment>
           <Header />
+          <Processos />
         </Fragment>
       </Provider>
     )

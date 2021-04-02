@@ -1,0 +1,1 @@
+export const GET_PROCESSOS = "GET_PROCESSOS";
