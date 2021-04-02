@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { loginEscavador } from '../../actions/auth';
+import {  Redirect } from "react-router-dom";
 
 export class Login extends Component {
 
@@ -9,12 +12,17 @@ export class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log("submit");
+        this.props.loginEscavador(this.state.email, this.state.password)
     }
 
     onChange = e => this.setState({[e.target.name]: e.target.value})
 
     render() {
+
+        if(this.props.isAuthenticated){
+            return <Redirect to="/" />
+        }
+
         const {email, password} = this.state;
 
         return (
@@ -35,7 +43,7 @@ export class Login extends Component {
                         <div className="form-group">
                             <label>Password</label>
                             <input
-                                type="text"
+                                type="password"
                                 className="form-control"
                                 name="password"
                                 onChange={this.onChange}
@@ -56,4 +64,8 @@ export class Login extends Component {
     }
 }
 
-export default Login
+const mapStateToProps = state =>({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { loginEscavador } )(Login)
