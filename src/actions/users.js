@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-import { GET_PROCESSOS } from './types'
+import { GET_USERS } from './types'
 
-//GET_PROCESSO
-export const getProcessos = () => (dispatch, getState)  =>  {
+//GET_USER
+export const getUsers = () => (dispatch, getState)  =>  {
     //todo
     const token = getState().auth.token;
     const tokenType = getState().auth.tokenType;
@@ -11,8 +11,7 @@ export const getProcessos = () => (dispatch, getState)  =>  {
     //HEADERS
     const config = {
         headers:{
-            'Content-Type': 'application/json',
-            'X-Requested-With':'XMLHttpRequest'
+            'Content-Type': 'application/json'
         }
     }
 
@@ -20,10 +19,11 @@ export const getProcessos = () => (dispatch, getState)  =>  {
         config.headers['Authorization'] = `${tokenType} ${token}`
     }
 
-    axios.get('https://api.escavador.com/api/v1/async/resultados', config)
+    axios.get('http://localhost:3000/users', config)
     .then(res => {
+        debugger
         dispatch({
-            type: GET_PROCESSOS,
+            type: GET_USERS,
             payload: res.data
         })
     }).catch(err => console.log(err))

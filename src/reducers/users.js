@@ -1,15 +1,16 @@
-import { GET_PROCESSOS } from "../actions/types";
+import { GET_USERS } from "../actions/types";
 
 const initialState = {
-    processos: {}
+    users: []
 }
 
 export default function(state = initialState, action){
     switch(action.type){
-        case GET_PROCESSOS:
+        case GET_USERS:
+            debugger
             return {
                 ...state, 
-                processos: action.payload
+                users: action.payload
             }
         default:
             return state;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class Processo extends Component {
+export class User extends Component {
     render() {
         return (
             <div>
@@ -10,4 +10,4 @@ export class Processo extends Component {
     }
 }
 
-export default Processo
+export default User

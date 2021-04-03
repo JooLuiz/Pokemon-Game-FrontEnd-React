@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import processos from "./processos"
+import users from "./users"
 import auth from "./auth"
 
 export default combineReducers({
-    processos,
+    users,
     auth
 })

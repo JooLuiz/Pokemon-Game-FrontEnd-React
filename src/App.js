@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Header from "./components/commom/Header";
 import Home from "./components/commom/Home";
 import Login from "./components/commom/Login";
-import Processos from "./components/templates/Processos";
+import Users from "./components/templates/Users";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import { HashRouter as Router, Route, Switch} from "react-router-dom";
 
@@ -18,8 +18,8 @@ class App extends Component{
             <Header />
             <div className="container">
               <Switch>
-                <PrivateRoute exact path="/" component={Home}/>
-                <PrivateRoute exact path="/processos" component={Processos}/>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/users" component={Users}/>
                 <Route exact path="/login" component={Login}/>
               </Switch>
             </div>

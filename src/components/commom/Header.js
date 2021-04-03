@@ -10,7 +10,7 @@ class Header extends Component {
                 <header className='header'>
                     <nav className="navbar navbar-expand-sm navbar-light bg-light">
                     <div className="container-fluid">
-                        <Link to="/" className="nav-link active">CPJurídico</Link>
+                        <Link to="/" className="nav-link active">Pokemon Game</Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                         </button>
@@ -21,7 +21,7 @@ class Header extends Component {
                                 <Link to="/" className="nav-link active">Home</Link>
                             </li>
                             <li className="nav-item">
-                            <Link to="/processos" className="nav-link active">Processos</Link>
+                            <Link to="/users" className="nav-link active">Users</Link>
                             </li>
                         </ul>
                         </div> : null
