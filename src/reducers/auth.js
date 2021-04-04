@@ -1,34 +1,33 @@
-import { LOGIN_ESCAVADOR_SUCCESS, LOGIN_ESCAVADOR_WAITING,LOGIN_ESCAVADOR_FAILURE } from "../actions/types";
+import { LOGIN_SUCCESS, LOGIN_WAITING, LOGIN_FAILURE, REGISTER_SUCCESS, REGISTER_FAILURE, REGISTER_WAITING } from "../actions/types";
 
 const initialState = {
     token: localStorage.getItem('token'),
-    tokenType: localStorage.getItem('tokenType'),
+    user: null,
     isAuthenticated: null,
     isLoading: false,
 }
 
 export default function(state = initialState, action){
     switch(action.type){
-        case LOGIN_ESCAVADOR_WAITING:
+        case LOGIN_WAITING, REGISTER_WAITING:
             return {
                 ...state,
                 isLoading: true
             }
-        case LOGIN_ESCAVADOR_SUCCESS:
+        case LOGIN_SUCCESS, REGISTER_SUCCESS:
             localStorage.setItem("token", action.payload.access_token)
-            localStorage.setItem("tokenType", action.payload.token_type)
             return{
                 ...state,
+                user: action.payload.user,
                 isLoading:false,
                 isAuthenticated:true,
             }
-        case LOGIN_ESCAVADOR_FAILURE:
+        case LOGIN_FAILURE, REGISTER_FAILURE:
             localStorage.removeItem('token');
-            localStorage.removeItem('tokenType');
             return {
                 ...state,
                 token: null,
-                tokenType: null,
+                user: null,
                 isAuthenticated: false,
                 isLoading: false
             }

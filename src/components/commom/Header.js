@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 class Header extends Component {
     render(){
         return (
-            <div className="container">
-                <header className='header'>
+            <div className="container" >
+                <header className='header' >
                     <nav className="navbar navbar-expand-sm navbar-light bg-light">
                     <div className="container-fluid">
                         <Link to="/" className="nav-link active">Pokemon Game</Link>
@@ -16,24 +16,32 @@ class Header extends Component {
                         </button>
                         {this.props.auth.isAuthenticated ?
                         <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul className="navbar-nav">
+                                <li className="nav-item">
+                                    <Link to="/" className="nav-link active">Home</Link>
+                                </li>
+                                <li className="nav-item">
+                                <Link to="/users" className="nav-link active">Users</Link>
+                                </li>
+                            </ul>
+                        </div> : 
+                        <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <Link to="/" className="nav-link active">Home</Link>
+                                <Link to="/login" className="nav-link active">Login</Link>
                             </li>
                             <li className="nav-item">
-                            <Link to="/users" className="nav-link active">Users</Link>
+                                <Link to="/register" className="nav-link active">Register</Link>
                             </li>
                         </ul>
-                        </div> : null
-                        }
+                    </div> }
                     </div>
                     </nav>
                 </header>
             </div>
         )
-    }
+    };
 }
-
 Header.defaultProps = {
     title: "Consulta de procesos jurídicos",
 }

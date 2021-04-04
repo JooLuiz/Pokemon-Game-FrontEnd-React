@@ -16,7 +16,7 @@ export const getUsers = () => (dispatch, getState)  =>  {
     }
 
     if(token && tokenType){
-        config.headers['Authorization'] = `${tokenType} ${token}`
+        config.headers['Authorization'] = `${token}`
     }
 
     axios.get('http://localhost:3000/users', config)

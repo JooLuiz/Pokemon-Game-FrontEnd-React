@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { loginEscavador } from '../../actions/auth';
-import {  Redirect } from "react-router-dom";
+import { login } from '../../actions/auth';
+import {  Redirect, Link } from "react-router-dom";
 
 export class Login extends Component {
 
@@ -12,7 +12,7 @@ export class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.loginEscavador(this.state.email, this.state.password)
+        this.props.login(this.state.email, this.state.password)
     }
 
     onChange = e => this.setState({[e.target.name]: e.target.value})
@@ -58,6 +58,9 @@ export class Login extends Component {
                             </button>
                         </div>
                     </form>
+                    <div>
+                        <p style={{textAlign:'center'}}>Don't have an account? <Link to="/register">Register</Link></p>
+                    </div>
                 </div>
             </div>
         )
@@ -68,4 +71,4 @@ const mapStateToProps = state =>({
     isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { loginEscavador } )(Login)
+export default connect(mapStateToProps, { login } )(Login)

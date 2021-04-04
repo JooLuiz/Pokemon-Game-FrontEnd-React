@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-import { LOGIN_ESCAVADOR_SUCCESS,LOGIN_ESCAVADOR_WAITING,LOGIN_ESCAVADOR_FAILURE } from './types'
+import { LOGIN_SUCCESS,LOGIN_WAITING,LOGIN_FAILURE,REGISTER_SUCCESS,REGISTER_WAITING,REGISTER_FAILURE } from './types'
 
-//LOGIN_ESCAVADOR_SUCCESS
-export const loginEscavador = ( email, password ) => (dispatch) =>  {
+//LOGIN_SUCCESS
+export const login = ( email, password ) => (dispatch) =>  {
     dispatch({
-        type: LOGIN_ESCAVADOR_WAITING,
+        type: LOGIN_WAITING,
     })
 
     //HEADERS
@@ -17,19 +17,52 @@ export const loginEscavador = ( email, password ) => (dispatch) =>  {
     }
 
     const body = JSON.stringify({
-        username:email, password
+        email, password
     })
 
-    axios.post('https://api.escavador.com/api/v1/request-token', body, config)
+    //TODO login
+    axios.post('http://localhost:3000/users/login', body, config)
     .then(res => {
         dispatch({
-            type: LOGIN_ESCAVADOR_SUCCESS,
+            type: LOGIN_SUCCESS,
             payload: res.data
         })
     }).catch(err => {
         console.log(err)
         dispatch({
-            type: LOGIN_ESCAVADOR_FAILURE,
+            type: LOGIN_FAILURE,
+        })
+    })
+}
+
+export const register = ( username, email, firstName, lastName, password ) => (dispatch) =>  {
+    dispatch({
+        type: REGISTER_WAITING,
+    })
+
+    //HEADERS
+    const config = {
+        headers:{
+            'Content-Type': 'application/json',
+            'X-Requested-With':'XMLHttpRequest'
+        }
+    }
+
+    const body = JSON.stringify({
+        username, email, firstName, lastName, password
+    })
+
+    //TODO register
+    axios.post('http://localhost:3000/users/register', body, config)
+    .then(res => {
+        dispatch({
+            type: REGISTER_SUCCESS,
+            payload: res.data
+        })
+    }).catch(err => {
+        console.log(err)
+        dispatch({
+            type: REGISTER_FAILURE,
         })
     })
 }
