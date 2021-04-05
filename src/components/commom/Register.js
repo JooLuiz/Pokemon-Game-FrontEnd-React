@@ -31,7 +31,7 @@ export class Register extends Component {
         return (
             <div className="col-md-6 m-auto">
                 <div className="card card-body m-5">
-                    <h2 className="text-center"> Login </h2>
+                    <h2 className="text-center"> Register </h2>
                     <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                             <label>Username</label>

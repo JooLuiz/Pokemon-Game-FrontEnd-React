@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import { getUsers } from '../../actions/users';
 
 export class User extends Component {
+    static propTypes = {
+        users: PropTypes.array.isRequired
+    }
+    
     componentDidMount(){
         this.props.getUsers();
     }

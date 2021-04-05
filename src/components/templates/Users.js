@@ -23,7 +23,8 @@ export class Users extends Component {
                             <p>Nome: {user.firstName} {user.lastName}</p>
                             <p>Usuário: {user.username}</p>
                             <p>E-mail: {user.email}</p>
-                            <Link to={"/user/" + user._id} params={{user : {}}} >Detalhe</Link>
+                            <Link to={"/user/" + user._id} >Detalhe</Link>
+                            <Link to={"/user/edit/" + user._id} >Edit</Link>
                         </div>
                     )
                 })}
