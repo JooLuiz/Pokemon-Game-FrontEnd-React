@@ -1,38 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUsers } from '../../actions/users';
+import { getUser } from '../../actions/users';
 
 export class User extends Component {
     static propTypes = {
-        users: PropTypes.array.isRequired
+        user: PropTypes.object.isRequired
     }
-    
+
     componentDidMount(){
-        this.props.getUsers();
+        this.props.getUser(this.props.match.params.id);
     }
 
     render() {
         return (
             <div>
-                {this.props.users.map((user) => {
-                    if(user._id == this.props.match.params.id){
-                        return(
-                            <div>
-                                <h3>{user.firstName} {user.lastName}</h3>
-                                <p>{user.username}</p>
-                                <p>{user.email}</p>
-                            </div>
-                        )
-                    }
-                })}
+                <div>
+                    <h3>{this.props.user.firstName} {this.props.user.lastName}</h3>
+                    <p>{this.props.user.username}</p>
+                    <p>{this.props.user.email}</p>
+                </div>  
             </div>
         )
     }
 }
 
 const mapStateToProps = state =>({
-    users: state.users.users
+    user: state.users.user
 });
 
-export default connect(mapStateToProps, { getUsers })(User)
+export default connect(mapStateToProps, { getUser })(User)

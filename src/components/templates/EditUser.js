@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUsers } from '../../actions/users';
+import { getUser } from '../../actions/users';
 
 export class EditUsers extends Component {
-
-    state={
-        id: this.props.match.params.id,
-        username: this.props.users.map((user) => {if(user._id == this.props.match.params.id){ return user.username }}),
-        email: this.props.users.map((user) => {if(user._id == this.props.match.params.id){ return user.email }}),
-        firstName: this.props.users.map((user) => {if(user._id == this.props.match.params.id){ return user.firstName }}),
-        lastName: this.props.users.map((user) => {if(user._id == this.props.match.params.id){ return user.lastName }})
-    }
     
     static propTypes = {
-        users: PropTypes.array.isRequired
+        user: PropTypes.object.isRequired
     }
 
     componentDidMount(){
-        this.props.getUsers();
+        this.props.getUser(this.props.match.params.id);
     }
 
     render() {
-        const {id, username, email, firstName, lastName } = this.state;
+        const {id, username, email, firstName, lastName } = this.props.user;
 
         return (
             <div className="card">
@@ -95,7 +87,7 @@ export class EditUsers extends Component {
 }
 
 const mapStateToProps = state =>({
-    users: state.users.users
+    user: state.users.user
 });
 
-export default connect(mapStateToProps, { getUsers })(EditUsers)
+export default connect(mapStateToProps, { getUser })(EditUsers)
