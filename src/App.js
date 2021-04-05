@@ -4,6 +4,7 @@ import Home from "./components/commom/Home";
 import Login from "./components/commom/Login";
 import Register from "./components/commom/Register";
 import Users from "./components/templates/Users";
+import User from "./components/templates/User";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import { HashRouter as Router, Route, Switch} from "react-router-dom";
 
@@ -20,7 +21,8 @@ class App extends Component{
             <div className="container">
               <Switch>
                 <PrivateRoute exact path="/" component={Home}/>
-                <PrivateRoute exact path="/users" component={Users}/>
+                <Route exact path="/user/:id?" component={User}/>
+                <Route exact path="/users" component={Users}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/register" component={Register}/>
               </Switch>

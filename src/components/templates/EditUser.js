@@ -16,17 +16,7 @@ export class Users extends Component {
     render() {
         return (
             <div className="card">
-                {this.props.users.map((user) => {
-                    return(
-                        <div className="card container">
-                            <p hidden={true} id={user._id}></p>
-                            <p>Nome: {user.firstName} {user.lastName}</p>
-                            <p>Usuário: {user.username}</p>
-                            <p>E-mail: {user.email}</p>
-                            <Link to={"/user/" + user._id} params={{user : {}}} >Detalhe</Link>
-                        </div>
-                    )
-                })}
+                
             </div>
         )
     }

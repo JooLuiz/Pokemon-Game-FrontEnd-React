@@ -21,7 +21,6 @@ export const getUsers = () => (dispatch, getState)  =>  {
 
     axios.get('http://localhost:3000/users', config)
     .then(res => {
-        debugger
         dispatch({
             type: GET_USERS,
             payload: res.data
