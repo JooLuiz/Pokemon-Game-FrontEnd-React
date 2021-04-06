@@ -1,4 +1,4 @@
-import { GET_USERS, GET_USER  } from "../actions/types";
+import { GET_USERS, GET_USER, EDIT_USER  } from "../actions/types";
 
 const initialState = {
     users: [],
@@ -16,6 +16,12 @@ export default function(state = initialState, action){
             return {
                 ...state, 
                 user: action.payload
+            }
+        case EDIT_USER:
+            return {
+                ...state,
+                user: action.payload,
+                users: this.state.users.filter((user) => user._id != action.payload._id).push(action.payload)
             }
         default:
             return state;

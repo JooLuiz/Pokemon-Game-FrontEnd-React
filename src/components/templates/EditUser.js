@@ -1,20 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUser } from '../../actions/users';
+import { getUser, editUser } from '../../actions/users';
 
 export class EditUsers extends Component {
-    
+    state={
+        id: this.props.user.id,
+        username: this.props.user.username,
+        email: this.props.user.email,
+        firstName: this.props.user.firstName,
+        lastName: this.props.user.lastName
+    }
+
+    componentWillMount(){
+        this.props.getUser(this.props.match.params.id);
+    }
+
     static propTypes = {
         user: PropTypes.object.isRequired
     }
 
-    componentDidMount(){
-        this.props.getUser(this.props.match.params.id);
+    onSubmit = e => {
+        e.preventDefault();
+        let user = 
+        {
+            username: this.state.username,
+            email: this.state.email,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName
+        }
+        this.props.editUser(this.props.match.params.id, user)
     }
 
+    onChange = e => this.setState({[e.target.name]: e.target.value})
+
     render() {
-        const {id, username, email, firstName, lastName } = this.props.user;
+        const {id, username, email, firstName, lastName } = this.state;
 
         return (
             <div className="card">
@@ -86,8 +107,8 @@ export class EditUsers extends Component {
     }
 }
 
-const mapStateToProps = state =>({
-    user: state.users.user
+const mapStateToProps = (state, props) =>({
+    user: state.users.users.length > 0 ? state.users.users.filter(user => user._id == props.match.params.id)[0] : state.users.user
 });
 
-export default connect(mapStateToProps, { getUser })(EditUsers)
+export default connect(mapStateToProps, { getUser, editUser })(EditUsers)

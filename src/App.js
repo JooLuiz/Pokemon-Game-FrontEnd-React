@@ -11,8 +11,14 @@ import { HashRouter as Router, Route, Switch} from "react-router-dom";
 
 import {Provider} from 'react-redux'
 import store from './store'
+import { getUsers } from './actions/users';
 
 class App extends Component{
+
+  componentWillMount() {
+    store.dispatch(getUsers());
+  }
+
   render(){
     return (
       <Provider store={store}>

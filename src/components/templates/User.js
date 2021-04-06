@@ -8,7 +8,7 @@ export class User extends Component {
         user: PropTypes.object.isRequired
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.props.getUser(this.props.match.params.id);
     }
 
@@ -25,8 +25,8 @@ export class User extends Component {
     }
 }
 
-const mapStateToProps = state =>({
-    user: state.users.user
+const mapStateToProps = (state, props) =>({
+    user: state.users.users.length > 0 ? state.users.users.filter(user => user._id == props.match.params.id)[0] : state.users.user
 });
 
 export default connect(mapStateToProps, { getUser })(User)
