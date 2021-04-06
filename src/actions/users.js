@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { GET_USERS, GET_USER, EDIT_USER } from './types'
+import { GET_USERS, GET_USER, EDIT_USER, DELETE_USER } from './types'
 
 //GET_USERS
 export const getUsers = () => (dispatch, getState)  =>  {
@@ -82,6 +82,32 @@ export const editUser = (id, user) => (dispatch, getState)  =>  {
     .then(res => {
         dispatch({
             type: EDIT_USER,
+            payload: res.data
+        })
+    }).catch(err => console.log(err))
+}
+
+//DELETE_USER
+export const deleteUser = (id) => (dispatch, getState)  =>  {
+    //todo
+    const token = getState().auth.token;
+    const tokenType = getState().auth.tokenType;
+
+    //HEADERS
+    const config = {
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }
+
+    if(token && tokenType){
+        config.headers['Authorization'] = `${token}`
+    }
+
+    axios.delete('http://localhost:3000/users/' + id, config)
+    .then(res => {
+        dispatch({
+            type: DELETE_USER,
             payload: res.data
         })
     }).catch(err => console.log(err))
