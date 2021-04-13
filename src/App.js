@@ -11,12 +11,12 @@ import { HashRouter as Router, Route, Switch} from "react-router-dom";
 
 import {Provider} from 'react-redux'
 import store from './store'
-import { getUsers } from './actions/users';
+import { getLoggedUser } from './actions/auth';
 
 class App extends Component{
 
   componentWillMount() {
-    store.dispatch(getUsers());
+    store.dispatch(getLoggedUser());
   }
 
   render(){

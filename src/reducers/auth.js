@@ -17,10 +17,12 @@ export default function(state = initialState, action){
             }
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
-            if(!state.isAuthenticated && localStorage.getItem('token')){
-                localStorage.removeItem("token");
+            if(action.payload.token){
+                if(!state.isAuthenticated && localStorage.getItem('token')){
+                    localStorage.removeItem("token");
+                }
+                localStorage.setItem("token", action.payload.token)
             }
-            localStorage.setItem("token", action.payload.token)
             return{
                 ...state,
                 user: action.payload.user,
