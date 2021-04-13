@@ -23,7 +23,6 @@ export const login = ( username, password ) => (dispatch) =>  {
     //TODO login
     axios.post('http://localhost:3000/auth', body, config)
     .then(res => {
-        debugger
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
