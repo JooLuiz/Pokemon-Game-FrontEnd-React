@@ -26,7 +26,7 @@ export class User extends Component {
 }
 
 const mapStateToProps = (state, props) =>({
-    user: state.users.users.length > 0 ? state.users.users.filter(user => user._id == props.match.params.id)[0] : state.users.user
+    user: state.users.users.length > 0 ? state.users.users.filter(user => user._id === props.match.params.id)[0] : state.users.user
 });
 
 export default connect(mapStateToProps, { getUser })(User)

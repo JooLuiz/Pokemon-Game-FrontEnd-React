@@ -6,7 +6,6 @@ import { GET_USERS, GET_USER, EDIT_USER, DELETE_USER } from './types'
 export const getUsers = () => (dispatch, getState)  =>  {
     //todo
     const token = getState().auth.token;
-    const tokenType = getState().auth.tokenType;
 
     //HEADERS
     const config = {
@@ -15,8 +14,8 @@ export const getUsers = () => (dispatch, getState)  =>  {
         }
     }
 
-    if(token && tokenType){
-        config.headers['Authorization'] = `${token}`
+    if(token){
+        config.headers['x-auth-token'] = `${token}`
     }
 
     axios.get('http://localhost:3000/users', config)
@@ -32,7 +31,6 @@ export const getUsers = () => (dispatch, getState)  =>  {
 export const getUser = (id) => (dispatch, getState)  =>  {
     //todo
     const token = getState().auth.token;
-    const tokenType = getState().auth.tokenType;
 
     //HEADERS
     const config = {
@@ -41,8 +39,8 @@ export const getUser = (id) => (dispatch, getState)  =>  {
         }
     }
 
-    if(token && tokenType){
-        config.headers['Authorization'] = `${token}`
+    if(token){
+        config.headers['x-auth-token'] = `${token}`
     }
 
     axios.get('http://localhost:3000/users/' + id, config)
@@ -58,7 +56,6 @@ export const getUser = (id) => (dispatch, getState)  =>  {
 export const editUser = (id, user) => (dispatch, getState)  =>  {
     //todo
     const token = getState().auth.token;
-    const tokenType = getState().auth.tokenType;
 
     //HEADERS
     const config = {
@@ -67,8 +64,8 @@ export const editUser = (id, user) => (dispatch, getState)  =>  {
         }
     }
 
-    if(token && tokenType){
-        config.headers['Authorization'] = `${token}`
+    if(token){
+        config.headers['x-auth-token'] = `${token}`
     }
 
     const body = JSON.stringify({
@@ -91,7 +88,6 @@ export const editUser = (id, user) => (dispatch, getState)  =>  {
 export const deleteUser = (id) => (dispatch, getState)  =>  {
     //todo
     const token = getState().auth.token;
-    const tokenType = getState().auth.tokenType;
 
     //HEADERS
     const config = {
@@ -100,8 +96,8 @@ export const deleteUser = (id) => (dispatch, getState)  =>  {
         }
     }
 
-    if(token && tokenType){
-        config.headers['Authorization'] = `${token}`
+    if(token){
+        config.headers['x-auth-token'] = `${token}`
     }
 
     axios.delete('http://localhost:3000/users/' + id, config)

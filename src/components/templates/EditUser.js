@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { getUser, editUser } from '../../actions/users';
 
 export class EditUsers extends Component {
@@ -109,7 +109,7 @@ export class EditUsers extends Component {
 }
 
 const mapStateToProps = (state, props) =>({
-    user: state.users.users.length > 0 ? state.users.users.filter(user => user._id == props.match.params.id)[0] : state.users.user
+    user: state.users.users.length > 0 ? state.users.users.filter(user => user._id === props.match.params.id)[0] : state.users.user
 });
 
 export default connect(mapStateToProps, { getUser, editUser })(EditUsers)

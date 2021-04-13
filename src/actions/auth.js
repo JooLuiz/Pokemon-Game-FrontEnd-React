@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-import { LOGIN_SUCCESS,LOGIN_WAITING,LOGIN_FAILURE,REGISTER_SUCCESS,REGISTER_WAITING,REGISTER_FAILURE } from './types'
+import { LOGIN_SUCCESS, LOGIN_WAITING, LOGIN_FAILURE, REGISTER_SUCCESS, REGISTER_WAITING, REGISTER_FAILURE } from './types'
 
 //LOGIN_SUCCESS
-export const login = ( email, password ) => (dispatch) =>  {
+export const login = ( username, password ) => (dispatch) =>  {
     dispatch({
         type: LOGIN_WAITING,
     })
@@ -17,12 +17,13 @@ export const login = ( email, password ) => (dispatch) =>  {
     }
 
     const body = JSON.stringify({
-        email, password
+        username, password
     })
 
     //TODO login
-    axios.post('http://localhost:3000/users/login', body, config)
+    axios.post('http://localhost:3000/auth', body, config)
     .then(res => {
+        debugger
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
@@ -53,7 +54,7 @@ export const register = ( username, email, firstName, lastName, password ) => (d
     })
 
     //TODO register
-    axios.post('http://localhost:3000/users/register', body, config)
+    axios.post('http://localhost:3000/auth/register', body, config)
     .then(res => {
         dispatch({
             type: REGISTER_SUCCESS,

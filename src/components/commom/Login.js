@@ -7,7 +7,7 @@ import { getUsers } from '../../actions/users';
 export class Login extends Component {
 
     state={
-        email: '',
+        username: '',
         password:''
     }
 
@@ -17,7 +17,7 @@ export class Login extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.login(this.state.email, this.state.password)
+        this.props.login(this.state.username, this.state.password)
     }
 
     onChange = e => this.setState({[e.target.name]: e.target.value})
@@ -28,7 +28,7 @@ export class Login extends Component {
             return <Redirect to="/" />
         }
 
-        const {email, password} = this.state;
+        const {username, password} = this.state;
 
         return (
             <div className="col-md-6 m-auto">
@@ -36,13 +36,13 @@ export class Login extends Component {
                     <h2 className="text-center"> Login </h2>
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
-                            <label>E-mail</label>
+                            <label>Username</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                name="email"
+                                name="username"
                                 onChange={this.onChange}
-                                value={email}
+                                value={username}
                             />
                         </div>
                         <div className="form-group">
