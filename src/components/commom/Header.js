@@ -2,8 +2,14 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { logout } from '../../actions/auth';
 
-class Header extends Component {
+export class Header extends Component {
+
+    logout() {
+        this.props.logout();
+    }
+
     render(){
         return (
             <div className="container" >
@@ -20,8 +26,10 @@ class Header extends Component {
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link active">Home</Link>
                                 </li>
+                            </ul>
+                            <ul className="navbar-nav">
                                 <li className="nav-item">
-                                <Link to="/users" className="nav-link active">Users</Link>
+                                    <a onClick={() => this.logout()} className="nav-link active">logout</a>
                                 </li>
                             </ul>
                         </div> : 
@@ -54,4 +62,4 @@ const mapStateToProps = state =>({
     auth: state.auth
 });
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, { logout } )(Header)
