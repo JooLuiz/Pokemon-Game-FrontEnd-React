@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPokemons } from '../../actions/pokemon';
+import { getPokemons, nextPage, previousPage } from '../../actions/pokemon';
 import { Link } from 'react-router-dom'
 
 export class Pokemons extends Component {
@@ -11,6 +11,16 @@ export class Pokemons extends Component {
 
     componentDidMount(){
         this.props.getPokemons();
+    }
+
+    onNext(){
+        debugger
+        this.props.nextPage();
+    }
+
+    onPrevious(){
+        debugger
+        this.props.previousPage();
     }
 
     render() {
@@ -55,13 +65,61 @@ export class Pokemons extends Component {
                     )
                 })}
                 </ul>
+                <ul style={{
+                    margin: 0,
+                    padding: 0,
+                    textAlign: "center"  
+                }}>
+                    {this.props.currPage !== 1 ? 
+                    <li style={{
+                       display: 'inline'
+                    }}><button 
+                        onClick={() => this.onPrevious()} 
+                        style={{
+                            borderRadius: "5px",
+                            WebkitTransition: "background-color 0.3s",
+                            transition: "background-color 0.3s",
+                            display: "inline-block",
+                            textDecoration: "none",
+                            padding: "5px 10px",
+                            color: "#000"
+                        }}>«</button></li> :
+                        <div></div>
+                    }
+                    <li style={{
+                       display: 'inline'
+                    }}><div 
+                        style={{
+                            borderRadius: "5px",
+                            WebkitTransition: "background-color 0.3s",
+                            transition: "background-color 0.3s",
+                            display: "inline-block",
+                            textDecoration: "none",
+                            padding: "5px 10px",
+                            color: "#000"
+                        }}>{this.props.currPage}</div></li>
+                    <li style={{
+                       display: 'inline'
+                    }}><button 
+                        onClick={() => this.onNext()}
+                        style={{
+                            borderRadius: "5px",
+                            WebkitTransition: "background-color 0.3s",
+                            transition: "background-color 0.3s",
+                            display: "inline-block",
+                            textDecoration: "none",
+                            padding: "5px 10px",
+                            color: "#000"
+                        }}>»</button></li>
+                </ul> 
             </div>
         )
     }
 }
 
 const mapStateToProps = state =>({
-    pokemons: state.pokemon.pokemons
+    pokemons: state.pokemon.pokemons,
+    currPage: state.pokemon.currPage
 });
 
-export default connect(mapStateToProps, { getPokemons })(Pokemons)
+export default connect(mapStateToProps, { getPokemons, nextPage, previousPage })(Pokemons)
