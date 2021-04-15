@@ -19,3 +19,5 @@ export const LOGOUT = "LOGOUT";
 //Pokemon
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMON = "GET_POKEMON";
+export const NEXT_PAGE_POKEMON = "NEXT_PAGE_POKEMON";
+export const PREVIOUS_PAGE_POKEMON = "PREVIOUS_PAGE_POKEMON";
