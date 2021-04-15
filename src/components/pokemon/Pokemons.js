@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getPokemons } from '../../actions/pokemon';
 import { Link } from 'react-router-dom'
 
-export class PokemonsScreen extends Component {
+export class Pokemons extends Component {
     static propTypes = {
         pokemons: PropTypes.array.isRequired
     }
@@ -25,7 +25,8 @@ export class PokemonsScreen extends Component {
                 }}>
                 {this.props.pokemons.map((pokemon) => {
                     return(
-                        <li 
+                        <Link 
+                        to={"/pokemon/" + pokemon.id}
                         key={pokemon.id}
                         className="card" 
                         style={{
@@ -39,7 +40,7 @@ export class PokemonsScreen extends Component {
                                 height: "180px",
                                 width: "180px",
                                 alignSelf: "center" 
-                            }} src={pokemon.defaultPic}/>
+                            }} src={pokemon.sprites.front_default}/>
                             <h2 
                                 className="card-title" 
                                 style={{
@@ -50,7 +51,7 @@ export class PokemonsScreen extends Component {
                                 }}>
                                     {pokemon.id}. {pokemon.name}
                                 </h2>
-                        </li>
+                        </Link>
                     )
                 })}
                 </ul>
@@ -63,4 +64,4 @@ const mapStateToProps = state =>({
     pokemons: state.pokemon.pokemons
 });
 
-export default connect(mapStateToProps, { getPokemons })(PokemonsScreen)
+export default connect(mapStateToProps, { getPokemons })(Pokemons)

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { GET_POKEMONS } from './types'
+import { GET_POKEMONS, GET_POKEMON } from './types'
 
 //GET_POKEMONS
 export const getPokemons = () => (dispatch)  =>  {
@@ -14,8 +14,9 @@ export const getPokemons = () => (dispatch)  =>  {
                 axios.get(poke.url)
                 .then(internRes => {
                     if(allPokemon[internRes.data.id - 1]){
-                        allPokemon[internRes.data.id - 1]["defaultPic"] = internRes.data.sprites.front_default;
-                        allPokemon[internRes.data.id - 1]["id"] = internRes.data.id;
+                        let url = allPokemon[internRes.data.id - 1]["url"];
+                        allPokemon[internRes.data.id - 1] = internRes.data;
+                        allPokemon[internRes.data.id - 1]["url"] = url;
                         allPokemon[internRes.data.id - 1] = allPokemon[internRes.data.id - 1];
                     }
                 })
@@ -26,6 +27,16 @@ export const getPokemons = () => (dispatch)  =>  {
                 type: GET_POKEMONS,
                 payload: allPokemon
             })
+        })
+    }).catch(err => console.log(err))
+}
+
+export const getPokemon = (id) => (dispatch)  =>  {
+    axios.get('https://pokeapi.co/api/v2/pokemon/' + id)
+    .then(res => {
+        dispatch({
+            type: GET_POKEMON,
+            payload: res.data
         })
     }).catch(err => console.log(err))
 }
