@@ -26,8 +26,9 @@ export class Header extends Component {
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link active">Home</Link>
                                 </li>
-                            </ul>
-                            <ul className="navbar-nav">
+                                <li className="nav-item">
+                                    <Link to="/pokemon/all" className="nav-link active">Pokemons</Link>
+                                </li>
                                 <li className="nav-item">
                                     <a onClick={() => this.logout()} className="nav-link active">logout</a>
                                 </li>
