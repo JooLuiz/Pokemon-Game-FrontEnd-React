@@ -1,10 +1,11 @@
-import { GET_POKEMONS, GET_POKEMON, NEXT_PAGE_POKEMON, PREVIOUS_PAGE_POKEMON } from "../actions/types";
+import { GET_POKEMONS, GET_POKEMON, CHANGE_PAGE_POKEMON } from "../actions/types";
 
 const initialState = {
     pokemons: [],
     pokemon:{},
     currPage: 1,
-    pageSize: 42
+    pageSize: 42,
+    lastPage: 21
 }
 
 export default function(state = initialState, action){
@@ -19,15 +20,10 @@ export default function(state = initialState, action){
                 ...state, 
                 pokemon: action.payload
             }
-        case NEXT_PAGE_POKEMON:
+        case CHANGE_PAGE_POKEMON:
             return {
                 ...state, 
-                currPage: state.currPage + 1
-            }
-        case PREVIOUS_PAGE_POKEMON:
-            return {
-                ...state, 
-                currPage: state.currPage - 1
+                currPage: action.payload
             }
         default:
             return state;

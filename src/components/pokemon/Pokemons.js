@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPokemons, nextPage, previousPage } from '../../actions/pokemon';
+import { getPokemons, specificPage } from '../../actions/pokemon';
 import { Link } from 'react-router-dom'
 
 export class Pokemons extends Component {
@@ -14,13 +14,21 @@ export class Pokemons extends Component {
     }
 
     onNext(){
-        debugger
-        this.props.nextPage();
+        this.props.specificPage(this.props.currPage + 1);
     }
 
     onPrevious(){
-        debugger
-        this.props.previousPage();
+        this.props.specificPage(this.props.currPage - 1);
+    }
+
+    onFirstPage(){
+        this.props.specificPage(1);
+    }
+    onSpecific(page){
+        this.props.specificPage(page);
+    }
+    onLast(){
+        this.props.specificPage(this.props.lastPage);
     }
 
     render() {
@@ -71,10 +79,44 @@ export class Pokemons extends Component {
                     textAlign: "center"  
                 }}>
                     {this.props.currPage !== 1 ? 
+                        <li style={{
+                        display: 'inline'
+                        }}><button 
+                            onClick={() => this.onFirstPage()} 
+                            style={{
+                                borderRadius: "5px",
+                                WebkitTransition: "background-color 0.3s",
+                                transition: "background-color 0.3s",
+                                display: "inline-block",
+                                textDecoration: "none",
+                                padding: "5px 10px",
+                                color: "#000"
+                            }}>1º</button>
+                        </li> :
+                        <span></span>
+                    }
+                    {this.props.currPage !== 1 ? 
+                        <li style={{
+                        display: 'inline'
+                        }}><button 
+                            onClick={() => this.onPrevious()} 
+                            style={{
+                                borderRadius: "5px",
+                                WebkitTransition: "background-color 0.3s",
+                                transition: "background-color 0.3s",
+                                display: "inline-block",
+                                textDecoration: "none",
+                                padding: "5px 10px",
+                                color: "#000"
+                            }}>«</button>
+                        </li> :
+                        <span></span>
+                    }
+                    {(this.props.currPage !== 1 && this.props.currPage !== 2) ? 
                     <li style={{
                        display: 'inline'
-                    }}><button 
-                        onClick={() => this.onPrevious()} 
+                    }}><div 
+                        onClick={() => this.onSpecific(this.props.currPage - 2)}
                         style={{
                             borderRadius: "5px",
                             WebkitTransition: "background-color 0.3s",
@@ -83,9 +125,25 @@ export class Pokemons extends Component {
                             textDecoration: "none",
                             padding: "5px 10px",
                             color: "#000"
-                        }}>«</button></li> :
-                        <div></div>
-                    }
+                        }}>{this.props.currPage - 2}</div>
+                    </li>
+                    : <span></span>}
+                    {this.props.currPage !== 1 ? 
+                    <li style={{
+                       display: 'inline'
+                    }}><div 
+                        onClick={() => this.onSpecific(this.props.currPage - 1)}
+                        style={{
+                            borderRadius: "5px",
+                            WebkitTransition: "background-color 0.3s",
+                            transition: "background-color 0.3s",
+                            display: "inline-block",
+                            textDecoration: "none",
+                            padding: "5px 10px",
+                            color: "#000"
+                        }}>{this.props.currPage - 1}</div>
+                    </li>
+                    : <div></div>}
                     <li style={{
                        display: 'inline'
                     }}><div 
@@ -96,8 +154,44 @@ export class Pokemons extends Component {
                             display: "inline-block",
                             textDecoration: "none",
                             padding: "5px 10px",
+                            color: "#000",
+                            backgroundColor: "#4caf50",
+                            color: "#fff"
+                        }}>{this.props.currPage}</div>
+                    </li>
+                    {this.props.currPage !== this.props.lastPage ? 
+                    <li style={{
+                       display: 'inline'
+                    }}><div 
+                        onClick={() => this.onSpecific(this.props.currPage + 1)}
+                        style={{
+                            borderRadius: "5px",
+                            WebkitTransition: "background-color 0.3s",
+                            transition: "background-color 0.3s",
+                            display: "inline-block",
+                            textDecoration: "none",
+                            padding: "5px 10px",
                             color: "#000"
-                        }}>{this.props.currPage}</div></li>
+                        }}>{this.props.currPage + 1}</div>
+                    </li> :
+                    <span></span>}
+                    {(this.props.currPage !== this.props.lastPage && this.props.currPage !== this.props.lastPage - 1) ? 
+                    <li style={{
+                       display: 'inline'
+                    }}><div 
+                        onClick={() => this.onSpecific(this.props.currPage + 2)}
+                        style={{
+                            borderRadius: "5px",
+                            WebkitTransition: "background-color 0.3s",
+                            transition: "background-color 0.3s",
+                            display: "inline-block",
+                            textDecoration: "none",
+                            padding: "5px 10px",
+                            color: "#000"
+                        }}>{this.props.currPage + 2}</div>
+                    </li>
+                    : <span></span> }
+                    {this.props.currPage !== this.props.lastPage ? 
                     <li style={{
                        display: 'inline'
                     }}><button 
@@ -110,7 +204,23 @@ export class Pokemons extends Component {
                             textDecoration: "none",
                             padding: "5px 10px",
                             color: "#000"
-                        }}>»</button></li>
+                        }}>»</button>
+                    </li> : <span></span>}
+                    {this.props.currPage !== this.props.lastPage ? 
+                    <li style={{
+                       display: 'inline'
+                    }}><button 
+                        onClick={() => this.onLast()}
+                        style={{
+                            borderRadius: "5px",
+                            WebkitTransition: "background-color 0.3s",
+                            transition: "background-color 0.3s",
+                            display: "inline-block",
+                            textDecoration: "none",
+                            padding: "5px 10px",
+                            color: "#000"
+                        }}>{this.props.lastPage}º</button>
+                    </li> : <span></span>}
                 </ul> 
             </div>
         )
@@ -119,7 +229,8 @@ export class Pokemons extends Component {
 
 const mapStateToProps = state =>({
     pokemons: state.pokemon.pokemons,
-    currPage: state.pokemon.currPage
+    currPage: state.pokemon.currPage,
+    lastPage: state.pokemon.lastPage
 });
 
-export default connect(mapStateToProps, { getPokemons, nextPage, previousPage })(Pokemons)
+export default connect(mapStateToProps, { getPokemons, specificPage })(Pokemons)
